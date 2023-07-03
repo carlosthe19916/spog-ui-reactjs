@@ -1,11 +1,9 @@
-import React, { useReducer, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useReducer } from "react";
 
 import {
   Brand,
   Button,
   ButtonVariant,
-  Dropdown,
   Masthead,
   MastheadBrand,
   MastheadContent,
@@ -18,20 +16,13 @@ import {
   ToolbarItem,
 } from "@patternfly/react-core";
 import BarsIcon from "@patternfly/react-icons/dist/js/icons/bars-icon";
-import BellIcon from "@patternfly/react-icons/dist/esm/icons/bell-icon";
-import CogIcon from "@patternfly/react-icons/dist/esm/icons/cog-icon";
-import HelpIcon from "@patternfly/react-icons/dist/esm/icons/help-icon";
 import QuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/question-circle-icon";
-import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
 
 import { AboutApp } from "./about";
 import logo from "../images/logo.png";
 
 export const HeaderApp: React.FC = () => {
-  const navigate = useNavigate();
-
   const [isAboutOpen, toggleIsAboutOpen] = useReducer((state) => !state, false);
-  const [isMobileDropdownOpen, toggleIsMobileDropdownOpen] = useState(false);
 
   return (
     <>

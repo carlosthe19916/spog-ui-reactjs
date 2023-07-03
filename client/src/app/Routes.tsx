@@ -1,19 +1,19 @@
 import React, { Suspense, lazy } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 
 import { Bullseye, Spinner } from "@patternfly/react-core";
 
-const Vulnerabilities = lazy(() => import("./pages/vulnerabilities"));
+const Home = lazy(() => import("./pages/home"));
+const Advisories = lazy(() => import("./pages/advisories"));
+const Packages = lazy(() => import("./pages/packages"));
 
 export const AppRoutes = () => {
-  const routes = [
-    {
-      Component: Vulnerabilities,
-      path: "/vulnerability",
-      hasDescendant: false,
-      children: undefined,
-    },
-  ];
+  const allRoutes = useRoutes([
+    { path: "/", element: <Home /> },
+    { path: "/advisory", element: <Advisories /> },
+    { path: "/package", element: <Packages /> },
+    { path: "*", element: <Navigate to="/" /> },
+  ]);
 
   return (
     <Suspense
@@ -23,19 +23,7 @@ export const AppRoutes = () => {
         </Bullseye>
       }
     >
-      <Routes>
-        {routes.map(({ path, hasDescendant, Component, children }, index) => (
-          <Route
-            key={index}
-            path={!hasDescendant ? path : `${path}/*`}
-            element={<Component />}
-          >
-           
-          </Route>
-        ))}
-        <Route path="/" element={<Navigate to="/vulnerability" />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
+      {allRoutes}
     </Suspense>
   );
 };

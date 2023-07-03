@@ -1,17 +1,17 @@
-export interface Filter {
+export interface ApiFilter {
   field: string;
   operator?: "=" | "!=" | "~" | ">" | ">=" | "<" | "<=";
   value:
     | string
     | number
     | {
-        list: string[];
+        list: (string | number)[];
         operator?: "AND" | "OR";
       };
 }
 
-export interface RequestParams {
-  filters?: Filter[];
+export interface ApiRequestParams {
+  filters?: ApiFilter[];
   sort?: {
     field: string;
     direction: "asc" | "desc";
@@ -22,8 +22,21 @@ export interface RequestParams {
   };
 }
 
-export interface PaginatedResult<T> {
+export interface ApiPaginatedResult<T> {
   data: T[];
   total: number;
-  params: RequestParams;
+  params: ApiRequestParams;
+}
+
+//
+
+export interface Advisory {
+  id: string;
+  title: string;
+  snippet: string;
+  desc: string;
+  date: string;
+  cves: string[];
+  cvss_max: number;
+  href: string;
 }

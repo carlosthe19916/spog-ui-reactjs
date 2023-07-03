@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { HashRouter } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 
 import { DefaultLayout } from "./layout";
 import { AppRoutes } from "./Routes";
@@ -10,11 +10,11 @@ import "@patternfly/patternfly/patternfly-addons.css";
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    <Router>
       <DefaultLayout>
         <AppRoutes />
       </DefaultLayout>
-    </HashRouter>
+    </Router>
   );
 };
 

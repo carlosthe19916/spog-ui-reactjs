@@ -1,26 +1,45 @@
 import axios from "axios";
-import { PaginatedResult, RequestParams } from "./models";
+import { Advisory, ApiPaginatedResult, ApiRequestParams } from "./models";
+import { serializeRequestParamsForApi } from "@app/shared/hooks/table-controls";
 
-export const getPaginatedResult = <T>(
+const API_V1 = "/api/v1";
+
+const SEARCH_ADVISORY = API_V1 + "/advisory/search";
+
+interface ApiSearchResult<T> {
+  total: number;
+  result: T[];
+}
+
+export const getApiPaginatedResult = <T>(
   url: string,
-  params: RequestParams = {}
-): Promise<PaginatedResult<T>> =>
+  params: ApiRequestParams = {}
+): Promise<ApiPaginatedResult<T>> =>
   axios
-    .get<T[]>(url, {
-      params: serializeRequestParamsForHub(params),
+    .get<ApiSearchResult<T>>(url, {
+      params: serializeRequestParamsForApi(params),
     })
-    .then(({ data, headers }) => ({
-      data,
-      total: headers["x-total"] ? parseInt(headers["x-total"], 10) : 0,
+    .then(({ data }) => ({
+      data: data.result,
+      total: data.total,
       params,
     }));
 
-export const serializeRequestParamsForHub = (
-  deserializedParams: RequestParams
-): URLSearchParams => {
-  const serializedParams = new URLSearchParams();
-//   serializeFilterRequestParamsForHub(deserializedParams, serializedParams);
-//   serializeSortRequestParamsForHub(deserializedParams, serializedParams);
-//   serializePaginationRequestParamsForHub(deserializedParams, serializedParams);
-  return serializedParams;
+export const getAdvisories = (params: ApiRequestParams = {}) => {
+  // let params1: ApiRequestParams = {
+  //   filters: [
+  //     { field: "q", value: "a", operator: "=" },
+  //     { field: "offset", value: "0", operator: "=" },
+  //     { field: "limit", value: "10", operator: "=" },
+  //   ],
+  //   page: {
+  //     pageNumber: 1,
+  //     itemsPerPage: 10,
+  //   },
+  //   sort: {
+  //     field: "uno",
+  //     direction: "asc"
+  //   }
+  // };
+  return getApiPaginatedResult<Advisory>(SEARCH_ADVISORY, params);
 };
