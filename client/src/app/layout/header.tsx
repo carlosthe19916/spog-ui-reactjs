@@ -1,15 +1,21 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 
 import {
   Brand,
   Button,
   ButtonVariant,
+  Dropdown,
+  DropdownItem,
+  DropdownList,
   Masthead,
   MastheadBrand,
   MastheadContent,
   MastheadMain,
   MastheadToggle,
+  MenuToggle,
+  MenuToggleElement,
   PageToggleButton,
+  Popper,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -17,12 +23,42 @@ import {
 } from "@patternfly/react-core";
 import BarsIcon from "@patternfly/react-icons/dist/js/icons/bars-icon";
 import QuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/question-circle-icon";
+import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
+import GithubIcon from "@patternfly/react-icons/dist/esm/icons/github-icon";
+import CogIcon from "@patternfly/react-icons/dist/esm/icons/cog-icon";
+import HelpIcon from "@patternfly/react-icons/dist/esm/icons/help-icon";
+import ThIcon from "@patternfly/react-icons/dist/esm/icons/th-icon";
+import imgAvatar from "@patternfly/react-core/src/components/Avatar/examples/avatarImg.svg";
 
 import { AboutApp } from "./about";
 import logo from "../images/logo.png";
 
 export const HeaderApp: React.FC = () => {
   const [isAboutOpen, toggleIsAboutOpen] = useReducer((state) => !state, false);
+  const [isKebabDropdownOpen, setIsKebabDropdownOpen] = useState(false);
+
+  const kebabDropdownItems = (
+    <>
+      <DropdownItem
+        key="github"
+        isExternalLink
+        to="https://github.com/trustification/trustification"
+      >
+        <GithubIcon /> Github
+      </DropdownItem>
+      <DropdownItem key="about" onClick={toggleIsAboutOpen}>
+        <HelpIcon /> About
+      </DropdownItem>
+    </>
+  );
+
+  const onKebabDropdownToggle = () => {
+    setIsKebabDropdownOpen(!isKebabDropdownOpen);
+  };
+
+  const onKebabDropdownSelect = () => {
+    setIsKebabDropdownOpen(!isKebabDropdownOpen);
+  };
 
   return (
     <>
@@ -47,7 +83,7 @@ export const HeaderApp: React.FC = () => {
           </MastheadBrand>
         </MastheadMain>
         <MastheadContent>
-          <Toolbar isFullHeight isStatic>
+          <Toolbar id="toolbar" isFullHeight isStatic>
             <ToolbarContent>
               <ToolbarGroup
                 variant="icon-button-group"
@@ -60,13 +96,52 @@ export const HeaderApp: React.FC = () => {
                 >
                   <ToolbarItem>
                     <Button
-                      aria-label="Help"
+                      aria-label="Github"
+                      variant={ButtonVariant.plain}
+                      icon={<GithubIcon />}
+                      component="a"
+                      target="_blank"
+                      href="https://github.com/trustification/trustification"
+                    />
+                  </ToolbarItem>
+                  <ToolbarItem>
+                    <Button
+                      aria-label="About"
                       variant={ButtonVariant.plain}
                       icon={<QuestionCircleIcon />}
                       onClick={toggleIsAboutOpen}
                     />
                   </ToolbarItem>
                 </ToolbarGroup>
+                <ToolbarItem
+                  visibility={{
+                    default: "hidden",
+                    md: "visible",
+                    lg: "hidden",
+                  }}
+                >
+                  <Dropdown
+                    isOpen={isKebabDropdownOpen}
+                    onSelect={onKebabDropdownSelect}
+                    onOpenChange={(isOpen: boolean) =>
+                      setIsKebabDropdownOpen(isOpen)
+                    }
+                    popperProps={{ position: "right" }}
+                    toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+                      <MenuToggle
+                        ref={toggleRef}
+                        onClick={onKebabDropdownToggle}
+                        isExpanded={isKebabDropdownOpen}
+                        variant="plain"
+                        aria-label="About"
+                      >
+                        <EllipsisVIcon aria-hidden="true" />
+                      </MenuToggle>
+                    )}
+                  >
+                    <DropdownList>{kebabDropdownItems}</DropdownList>
+                  </Dropdown>
+                </ToolbarItem>
               </ToolbarGroup>
             </ToolbarContent>
           </Toolbar>

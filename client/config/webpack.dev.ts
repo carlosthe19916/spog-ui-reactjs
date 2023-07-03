@@ -30,7 +30,7 @@ const config = merge<Configuration>(commonWebpackConfiguration, {
       // In dev mode, populate window._env at build time
       filename: "index.html",
       template: path.resolve(__dirname, "../public/index.html.ejs"),
-      favicon: path.resolve(__dirname, `../public/${brandType}-favicon.ico`),
+      favicon: path.resolve(__dirname, `../public/${brandType}-favicon.svg`),
       templateParameters: {
         _env: getEncodedEnv(),
         brandType,

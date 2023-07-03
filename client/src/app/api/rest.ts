@@ -26,20 +26,5 @@ export const getApiPaginatedResult = <T>(
     }));
 
 export const getAdvisories = (params: ApiRequestParams = {}) => {
-  // let params1: ApiRequestParams = {
-  //   filters: [
-  //     { field: "q", value: "a", operator: "=" },
-  //     { field: "offset", value: "0", operator: "=" },
-  //     { field: "limit", value: "10", operator: "=" },
-  //   ],
-  //   page: {
-  //     pageNumber: 1,
-  //     itemsPerPage: 10,
-  //   },
-  //   sort: {
-  //     field: "uno",
-  //     direction: "asc"
-  //   }
-  // };
   return getApiPaginatedResult<Advisory>(SEARCH_ADVISORY, params);
 };

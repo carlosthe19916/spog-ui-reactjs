@@ -149,10 +149,33 @@ export const serializeFilterRequestParamsForApi = (
   serializedParams: URLSearchParams
 ) => {
   const { filters } = deserializedParams;
+  // if (filters) {
+  //   serializedParams.append(
+  //     "filter",
+  //     filters.map(serializeFilterForApi).join(",")
+  //   );
+  // }
+
   if (filters) {
-    serializedParams.append(
-      "filter",
-      filters.map(serializeFilterForApi).join(",")
-    );
+    // console.log(filters);
+    // Object.entries(filters).map(([key, value]) => {
+    //   if (typeof value === "string") {
+    //     serializedParams.append(key, serializeFilterForApi(value));
+    //   }
+    // });
+    filters.forEach((filter) => {
+      const { field, operator, value } = filter;
+
+      const joinedValue =
+        typeof value === "string"
+          ? wrapInQuotesAndEscape(value)
+          : typeof value === "number"
+          ? `"${value}"`
+          : `(${value.list
+              .map(wrapInQuotesAndEscape)
+              .join(value.operator === "OR" ? "|" : ",")})`;
+
+      serializedParams.append(field, joinedValue);
+    });
   }
 };

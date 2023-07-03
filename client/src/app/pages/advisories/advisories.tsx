@@ -45,9 +45,6 @@ export const Advisories: React.FC = () => {
         title: "Name",
         type: FilterType.search,
         placeholderText: "Search",
-        getServerFilterValue: (value) => {
-          return value ? [`*${value[0]}*`] : ["hello"];
-        },
       },
     ],
     initialItemsPerPage: 10,
@@ -104,68 +101,89 @@ export const Advisories: React.FC = () => {
         </TextContent>
       </PageSection>
       <PageSection>
-        <Toolbar {...toolbarProps}>
-          <ToolbarContent>
-            <FilterToolbar {...filterToolbarProps} />
-            <ToolbarItem {...paginationToolbarItemProps}>
-              <SimplePagination
-                idPrefix="dependencies-table"
-                isTop
-                paginationProps={paginationProps}
-              />
-            </ToolbarItem>
-          </ToolbarContent>
-        </Toolbar>
+        <div
+          style={{
+            backgroundColor: "var(--pf-v5-global--BackgroundColor--100)",
+          }}
+        >
+          <Toolbar {...toolbarProps}>
+            <ToolbarContent>
+              <FilterToolbar {...filterToolbarProps} />
+              <ToolbarItem {...paginationToolbarItemProps}>
+                <SimplePagination
+                  idPrefix="dependencies-table"
+                  isTop
+                  paginationProps={paginationProps}
+                />
+              </ToolbarItem>
+            </ToolbarContent>
+          </Toolbar>
 
-        <Table {...tableProps} aria-label="Migration waves table">
-          <Thead>
-            <Tr>
-              <TableHeaderContentWithControls {...tableControls}>
-                <Th {...getThProps({ columnKey: "id" })} />
-                <Th {...getThProps({ columnKey: "foundIn" })} />
-                <Th {...getThProps({ columnKey: "version" })} />
-              </TableHeaderContentWithControls>
-            </Tr>
-          </Thead>
-          <ConditionalTableBody
-            isLoading={isFetching}
-            isError={!!fetchError}
-            isNoData={totalItemCount === 0}
-            numRenderedColumns={numRenderedColumns}
-          >
-            {currentPageItems?.map((dependency, rowIndex) => {
-              return (
-                <Tbody key={dependency.id}>
-                  <Tr {...getClickableTrProps({ item: dependency })}>
-                    <TableRowContentWithControls
-                      {...tableControls}
-                      item={dependency}
-                      rowIndex={rowIndex}
-                    >
-                      <Td width={25} {...getTdProps({ columnKey: "id" })}>
-                        {dependency.id}
-                      </Td>
-                      <Td width={10} {...getTdProps({ columnKey: "foundIn" })}>
-                        {/* TODO - the applications property disappeared in the API? */}
-                        {/*dependency.applications.length} applications*/}
-                        TODO
-                      </Td>
-                      <Td width={10} {...getTdProps({ columnKey: "version" })}>
-                        version
-                      </Td>
-                    </TableRowContentWithControls>
-                  </Tr>
-                </Tbody>
-              );
-            })}
-          </ConditionalTableBody>
-        </Table>
+          <Table {...tableProps} aria-label="Advisories table">
+            <Thead>
+              <Tr>
+                <TableHeaderContentWithControls {...tableControls}>
+                  <Th {...getThProps({ columnKey: "id" })} />
+                  <Th {...getThProps({ columnKey: "title" })} />
+                  <Th {...getThProps({ columnKey: "revision" })} />
+                  <Th {...getThProps({ columnKey: "download" })} />
+                  <Th {...getThProps({ columnKey: "vulnerabilities" })} />
+                </TableHeaderContentWithControls>
+              </Tr>
+            </Thead>
+            <ConditionalTableBody
+              isLoading={isFetching}
+              isError={!!fetchError}
+              isNoData={totalItemCount === 0}
+              numRenderedColumns={numRenderedColumns}
+            >
+              {currentPageItems?.map((item, rowIndex) => {
+                return (
+                  <Tbody key={item.id}>
+                    <Tr {...getClickableTrProps({ item: item })}>
+                      <TableRowContentWithControls
+                        {...tableControls}
+                        item={item}
+                        rowIndex={rowIndex}
+                      >
+                        <Td width={25} {...getTdProps({ columnKey: "id" })}>
+                          {item.id}
+                        </Td>
+                        <Td width={10} {...getTdProps({ columnKey: "title" })}>
+                          {item.title}
+                        </Td>
+                        <Td
+                          width={10}
+                          {...getTdProps({ columnKey: "revision" })}
+                        >
+                          {item.date}
+                        </Td>
+                        <Td
+                          width={10}
+                          {...getTdProps({ columnKey: "download" })}
+                        >
+                          down
+                        </Td>
+                        <Td
+                          width={10}
+                          {...getTdProps({ columnKey: "download" })}
+                        >
+                          {item.cves}
+                        </Td>
+                      </TableRowContentWithControls>
+                    </Tr>
+                  </Tbody>
+                );
+              })}
+            </ConditionalTableBody>
+          </Table>
 
-        <SimplePagination
-          idPrefix="dependencies-table"
-          isTop={false}
-          paginationProps={paginationProps}
-        />
+          <SimplePagination
+            idPrefix="dependencies-table"
+            isTop={false}
+            paginationProps={paginationProps}
+          />
+        </div>
       </PageSection>
     </>
   );

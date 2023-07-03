@@ -13,7 +13,8 @@ import ExternalLinkSquareAltIcon from "@patternfly/react-icons/dist/esm/icons/ex
 
 import { LayoutTheme } from "./layout-constants";
 
-const ACTIVE_CLASS = "pf-v5-c-nav__link";
+const LINK_CLASS = "pf-v5-c-nav__link";
+const ACTIVE_LINK_CLASS = "pf-m-current";
 
 export const SidebarApp: React.FC = () => {
   const [isSearchSectionExpanded, setIsSearchSectionExpanded] = useState(true);
@@ -22,42 +23,42 @@ export const SidebarApp: React.FC = () => {
     return (
       <Nav id="nav-sidebar" aria-label="Nav" theme={LayoutTheme}>
         <NavList>
-          <NavItem>
+          <li className="pf-v5-c-nav__item">
             <NavLink
               to="/"
               className={({ isActive }) => {
-                return css(ACTIVE_CLASS, isActive ? "pf-m-current" : "");
+                return css(LINK_CLASS, isActive ? ACTIVE_LINK_CLASS : "");
               }}
             >
               Trusted Content
             </NavLink>
-          </NavItem>
+          </li>
           <NavExpandable
             title="Search"
             groupId="search"
             isExpanded={isSearchSectionExpanded}
             onExpand={(_, isOpen) => setIsSearchSectionExpanded(isOpen)}
           >
-            <NavItem>
+            <li className="pf-v5-c-nav__item">
               <NavLink
                 to="/package"
                 className={({ isActive }) => {
-                  return css(ACTIVE_CLASS, isActive ? "pf-m-current" : "");
+                  return css(LINK_CLASS, isActive ? ACTIVE_LINK_CLASS : "");
                 }}
               >
                 Packages
               </NavLink>
-            </NavItem>
-            <NavItem>
+            </li>
+            <li className="pf-v5-c-nav__item">
               <NavLink
                 to="/advisory"
                 className={({ isActive }) => {
-                  return css(ACTIVE_CLASS, isActive ? "pf-m-current" : "");
+                  return css(LINK_CLASS, isActive ? ACTIVE_LINK_CLASS : "");
                 }}
               >
                 Advisories
               </NavLink>
-            </NavItem>
+            </li>
           </NavExpandable>
           <NavExpandable title="Extend">
             <NavItem>
