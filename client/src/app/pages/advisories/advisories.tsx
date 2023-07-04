@@ -51,7 +51,7 @@ export const Advisories: React.FC = () => {
       download: "Download",
       vulnerabilities: "Vulnerabilities",
     },
-    sortableColumns: ["revision", "vulnerabilities"],
+    sortableColumns: [],
     initialSort: null,
     filterCategories: [
       {
@@ -72,10 +72,6 @@ export const Advisories: React.FC = () => {
   } = useFetchAdvisories(
     getApiRequestParams({
       ...tableControlState, // Includes filterState, sortState and paginationState
-      apiSortFieldKeys: {
-        revision: "revision",
-        vulnerabilities: "vulnerabilities",
-      },
     })
   );
 
@@ -125,7 +121,7 @@ export const Advisories: React.FC = () => {
               <FilterToolbar {...filterToolbarProps} />
               <ToolbarItem {...paginationToolbarItemProps}>
                 <SimplePagination
-                  idPrefix="dependencies-table"
+                  idPrefix="advisories-table"
                   isTop
                   paginationProps={paginationProps}
                 />
@@ -212,7 +208,7 @@ export const Advisories: React.FC = () => {
           </Table>
 
           <SimplePagination
-            idPrefix="dependencies-table"
+            idPrefix="advisories-table"
             isTop={false}
             paginationProps={paginationProps}
           />

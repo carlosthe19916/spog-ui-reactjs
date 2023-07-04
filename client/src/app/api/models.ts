@@ -100,3 +100,33 @@ export interface CVSS_v3 {
   version: string;
   products: string[];
 }
+
+// Package
+
+export interface Package {
+  id: string;
+  name: string;
+  version: string;
+  supplier: string;
+  created: string;
+  dependencies: string[];
+  advisories: string[];
+  href: string[];
+}
+
+export interface PackageDetails {
+  name: string;
+  SPDXID: string;
+  documentNamespace: string;
+  spdxVersion: string;
+  dataLicense: string;
+  creationInfo: {
+    created: string;
+    licenseListVersion: string;
+    creators: string[];
+  };
+  packages: {
+    name: string;
+    versionInfo: string;
+  }[];
+}
