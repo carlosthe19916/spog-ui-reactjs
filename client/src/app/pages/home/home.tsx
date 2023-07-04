@@ -12,11 +12,11 @@ export const Home: React.FC = () => {
     <>
       <PageSection variant={PageSectionVariants.light}>
         <TextContent>
-          <Text component="h1">Home</Text>
-          <Text component="p">Search vulnerabilities</Text>
+          <Text component="h1">Trusted Content</Text>
+          <Text component="p">Fully hosted and managed service</Text>
         </TextContent>
       </PageSection>
-      <PageSection variant={PageSectionVariants.default}></PageSection>
+      <PageSection variant={PageSectionVariants.default}>content</PageSection>
     </>
   );
 };

@@ -3,6 +3,8 @@ import CopyPlugin from "copy-webpack-plugin";
 import Dotenv from "dotenv-webpack";
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
 import { Configuration, WatchIgnorePlugin } from "webpack";
+import MonacoWebpackPlugin from "monaco-editor-webpack-plugin";
+import { LANGUAGES_BY_FILE_EXTENSION } from "./monacoConstants";
 
 const BG_IMAGES_DIRNAME = "images";
 
@@ -152,6 +154,17 @@ const config: Configuration = {
         ],
         type: "javascript/auto",
       },
+      // For monaco-editor-webpack-plugin
+      {
+        test: /\.css$/,
+        include: [path.resolve(__dirname, "../../node_modules/monaco-editor")],
+        use: ["style-loader", "css-loader"],
+      },
+      // For monaco-editor-webpack-plugin
+      {
+        test: /\.ttf$/,
+        type: "asset/resource",
+      },
     ],
   },
   plugins: [
@@ -170,6 +183,9 @@ const config: Configuration = {
     }),
     new WatchIgnorePlugin({
       paths: [/\.js$/, /\.d\.ts$/],
+    }),
+    new MonacoWebpackPlugin({
+      languages: Object.values(LANGUAGES_BY_FILE_EXTENSION),
     }),
   ],
   resolve: {
