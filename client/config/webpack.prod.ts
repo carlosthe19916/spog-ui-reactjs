@@ -34,7 +34,7 @@ const config = merge<Configuration>(commonWebpackConfiguration, {
         __dirname,
         "../public/index.html.ejs"
       )}`,
-      favicon: path.resolve(__dirname, `../public/${brandType}-favicon.ico`),
+      favicon: path.resolve(__dirname, `../public/${brandType}-favicon.svg`),
     }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: "production",

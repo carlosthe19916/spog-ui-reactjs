@@ -83,9 +83,9 @@ export const MultiselectFilterControl = <
   const chips = selections ? selections.map(getChipFromOptionValue) : [];
 
   const renderSelectOptions = (options: OptionPropsWithKey[]) =>
-    options.map((optionProps) => (
-      <SelectOption {...optionProps} key={optionProps.key} />
-    ));
+    options.map(({ component, ...optionProps }) => {
+      return <SelectOption {...optionProps} key={optionProps.key} />;
+    });
 
   const onOptionsFilter: SelectProps["onFilter"] = (_event, textInput) =>
     renderSelectOptions(
@@ -101,8 +101,7 @@ export const MultiselectFilterControl = <
     );
 
   const placeholderText =
-    category.placeholderText ||
-    `Filter by ${category.title}...`;
+    category.placeholderText || `Filter by ${category.title}...`;
 
   return (
     <ToolbarFilter

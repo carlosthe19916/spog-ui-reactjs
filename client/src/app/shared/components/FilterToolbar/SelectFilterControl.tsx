@@ -80,9 +80,9 @@ export const SelectFilterControl = <TItem, TFilterCategoryKey extends string>({
         placeholderText="Any"
         isDisabled={isDisabled || category.selectOptions.length === 0}
       >
-        {category.selectOptions.map((optionProps) => (
-          <SelectOption {...optionProps} key={optionProps.key} />
-        ))}
+        {category.selectOptions.map(({ component, ...optionProps }) => {
+          return <SelectOption {...optionProps} key={optionProps.key} />;
+        })}
       </Select>
     </ToolbarFilter>
   );

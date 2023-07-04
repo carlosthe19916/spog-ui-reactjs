@@ -111,7 +111,7 @@ export interface Package {
   created: string;
   dependencies: string[];
   advisories: string[];
-  href: string[];
+  href: string;
 }
 
 export interface PackageDetails {
