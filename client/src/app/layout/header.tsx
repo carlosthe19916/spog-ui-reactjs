@@ -15,7 +15,6 @@ import {
   MenuToggle,
   MenuToggleElement,
   PageToggleButton,
-  Popper,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
@@ -25,10 +24,7 @@ import BarsIcon from "@patternfly/react-icons/dist/js/icons/bars-icon";
 import QuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/question-circle-icon";
 import EllipsisVIcon from "@patternfly/react-icons/dist/esm/icons/ellipsis-v-icon";
 import GithubIcon from "@patternfly/react-icons/dist/esm/icons/github-icon";
-import CogIcon from "@patternfly/react-icons/dist/esm/icons/cog-icon";
 import HelpIcon from "@patternfly/react-icons/dist/esm/icons/help-icon";
-import ThIcon from "@patternfly/react-icons/dist/esm/icons/th-icon";
-import imgAvatar from "@patternfly/react-core/src/components/Avatar/examples/avatarImg.svg";
 
 import { AboutApp } from "./about";
 import logo from "../images/logo.png";
