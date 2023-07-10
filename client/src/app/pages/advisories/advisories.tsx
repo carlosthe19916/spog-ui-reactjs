@@ -41,12 +41,14 @@ import {
 import DownloadIcon from "@patternfly/react-icons/dist/esm/icons/download-icon";
 import spacing from "@patternfly/react-styles/css/utilities/Spacing/spacing";
 import { AdvisoryDetails } from "./components/details";
+import { Severity } from "./components/severity";
 
 export const Advisories: React.FC = () => {
   const tableControlState = useTableControlUrlParams({
     columnNames: {
       id: "Id",
       title: "Title",
+      severity: "Severity",
       revision: "Revision",
       download: "Download",
       vulnerabilities: "Vulnerabilities",
@@ -135,6 +137,7 @@ export const Advisories: React.FC = () => {
                 <TableHeaderContentWithControls {...tableControls}>
                   <Th {...getThProps({ columnKey: "id" })} />
                   <Th {...getThProps({ columnKey: "title" })} />
+                  <Th {...getThProps({ columnKey: "severity" })} />
                   <Th {...getThProps({ columnKey: "revision" })} />
                   <Th {...getThProps({ columnKey: "download" })} />
                   <Th {...getThProps({ columnKey: "vulnerabilities" })} />
@@ -165,6 +168,9 @@ export const Advisories: React.FC = () => {
                           {...getTdProps({ columnKey: "title" })}
                         >
                           {item.title}
+                        </Td>
+                        <Td {...getTdProps({ columnKey: "severity" })}>
+                          <Severity advisory={item} />
                         </Td>
                         <Td {...getTdProps({ columnKey: "revision" })}>
                           {item.date}

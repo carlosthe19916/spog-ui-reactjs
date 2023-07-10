@@ -30,6 +30,8 @@ export interface ApiPaginatedResult<T> {
 
 //
 
+export type AdvisorySeverity = "Low" | "Moderate" | "Important" | "Critical";
+
 export interface Advisory {
   id: string;
   title: string;
@@ -39,6 +41,7 @@ export interface Advisory {
   cves: string[];
   cvss_max: number;
   href: string;
+  severity: AdvisorySeverity;
 }
 
 export interface AdvisoryDetails {
@@ -77,6 +80,7 @@ export interface Vulnerability {
     id: string;
     name: string;
   };
+  product_status: { [k: string]: string[] };
 }
 
 export interface Score {

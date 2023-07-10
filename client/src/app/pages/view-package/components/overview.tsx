@@ -33,7 +33,7 @@ export const Overview: React.FC<OverviewProps> = ({ packageDetails }) => {
                     {packageDetails.name}
                   </DescriptionListDescription>
                 </DescriptionListGroup>
-                <DescriptionListGroup>
+                {/* <DescriptionListGroup>
                   <DescriptionListTerm>ID</DescriptionListTerm>
                   <DescriptionListDescription>
                     {packageDetails.SPDXID}
@@ -56,12 +56,12 @@ export const Overview: React.FC<OverviewProps> = ({ packageDetails }) => {
                   <DescriptionListDescription>
                     {packageDetails.dataLicense}
                   </DescriptionListDescription>
-                </DescriptionListGroup>
+                </DescriptionListGroup> */}
               </DescriptionList>
             </CardBody>
           </Card>
         </GridItem>
-        <GridItem md={3}>
+        {/* <GridItem md={3}>
           <Card isFullHeight>
             <CardTitle>Creation</CardTitle>
             <CardBody>
@@ -139,7 +139,7 @@ export const Overview: React.FC<OverviewProps> = ({ packageDetails }) => {
               </DescriptionList>
             </CardBody>
           </Card>
-        </GridItem>
+        </GridItem> */}
       </Grid>
     </>
   );

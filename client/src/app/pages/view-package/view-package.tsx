@@ -41,11 +41,11 @@ export const ViewPackage: React.FC = () => {
             title={<TabTitleText>Overview</TabTitleText>}
             tabContentRef={contentRef1}
           />
-          <Tab
+          {/* <Tab
             eventKey={1}
             title={<TabTitleText>Packages</TabTitleText>}
             tabContentRef={contentRef2}
-          />
+          /> */}
           <Tab
             eventKey={2}
             title={<TabTitleText>Source</TabTitleText>}
@@ -62,7 +62,7 @@ export const ViewPackage: React.FC = () => {
         >
           {result && <Overview packageDetails={result} />}
         </TabContent>
-        <TabContent
+        {/* <TabContent
           eventKey={1}
           id="refTab2Section"
           ref={contentRef2}
@@ -70,7 +70,7 @@ export const ViewPackage: React.FC = () => {
           hidden
         >
           {result && <Packages packageDetails={result} />}
-        </TabContent>
+        </TabContent> */}
         <TabContent
           eventKey={2}
           id="refTab3Section"
