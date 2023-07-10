@@ -16,7 +16,7 @@ const config = merge<Configuration>(commonWebpackConfiguration, {
     port: 3000,
     proxy: {
       // NOTE: Any future non-UI paths handled by the server package should be added here.
-      "/api": "http://localhost:8083",
+      "/api": "http://localhost:8080",
     },
     historyApiFallback: {
       disableDotRule: true,

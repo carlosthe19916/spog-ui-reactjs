@@ -7,7 +7,7 @@ export default function (app) {
       target: process.env.SPOG_API_URL || "http://localhost:8083",
       changeOrigin: true,
       pathRewrite: {
-        "^/api": "",
+        "^/api": "/api",
       },
       logLevel: process.env.DEBUG ? "debug" : "info",
     })
