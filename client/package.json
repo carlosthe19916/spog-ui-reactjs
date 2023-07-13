@@ -14,7 +14,7 @@
   "dependencies": {
     "@patternfly/patternfly": "^5.0.0-prerelease.11",
     "@patternfly/react-code-editor": "^5.0.0-prerelease.15",
-    "@patternfly/react-core": "^5.0.0-prerelease.15",
+    "@patternfly/react-core": "^5.0.0-prerelease.22",
     "@patternfly/react-table": "^5.0.0-prerelease.15",
     "@patternfly/react-tokens": "^5.0.0-prerelease.6",
     "@tanstack/react-query": "^4.29.19",
