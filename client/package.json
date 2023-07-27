@@ -12,7 +12,7 @@
     "tsc": "tsc -p ./tsconfig.json"
   },
   "dependencies": {
-    "@patternfly/patternfly": "^5.0.0-prerelease.11",
+    "@patternfly/patternfly": "^5.0.2",
     "@patternfly/react-code-editor": "^5.0.0-prerelease.15",
     "@patternfly/react-core": "^5.0.0-prerelease.15",
     "@patternfly/react-table": "^5.0.0-prerelease.15",
